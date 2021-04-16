@@ -1,3 +1,4 @@
 .vscode
 external
 build
+build_windows
