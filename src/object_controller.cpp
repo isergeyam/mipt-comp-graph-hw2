@@ -36,4 +36,7 @@ void ObjectController::process_events() {
   }
 }
 
+ObjectController::ObjectController(size_t initialCount)
+    : objects(initialCount) {}
+
 std::vector<Object>& ObjectController::getObjects() { return objects; }

@@ -38,11 +38,11 @@ Object::Object() {
                 glm::rotate(glm::mat4(1.0f), rotation_angle, rotationAxis);
 }
 
-glm::vec3 Object::getPosition() { return position; }
+glm::vec3 Object::getObjectPosition() { return position; }
 
 bool Object::init() {
   generator = std::mt19937(rd());
-  uniform_distrib = std::uniform_real_distribution<float>{0.f, 10.f};
+  uniform_distrib = std::uniform_real_distribution<float>{0.f, 30.f};
   uniform_distrib_angle = std::uniform_real_distribution<float>{0.f, 360.f};
   // Create and compile our GLSL program from the shaders
   programID = LoadShaders("../shaders/TransformVertexShader.glsl",

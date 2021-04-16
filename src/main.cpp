@@ -18,6 +18,7 @@ using namespace glm;
 #include <common/controls.hpp>
 #include <common/objloader.hpp>
 #include <common/shader.hpp>
+#include <common/text2D.hpp>
 #include <common/texture.hpp>
 
 #include "fire_ball_controller.hpp"
@@ -32,13 +33,18 @@ int main(void) {
   if (window == nullptr) return -1;
   FireBall::init();
   Object::init();
+  size_t collideCount = 0;
+  std::string text;
 
   GLuint VertexArrayID;
   glGenVertexArrays(1, &VertexArrayID);
   glBindVertexArray(VertexArrayID);
 
   FireBallController fireBallController;
-  ObjectController objectController;
+  ObjectController objectController(10);
+
+  // Initialize our little text library with the Holstein font
+  initText2D("../textures/Holstein.DDS");
 
   do {
     // Clear the screen
@@ -47,7 +53,14 @@ int main(void) {
 
     fireBallController.process_events();
     objectController.process_events();
-    collide(fireBallController.getFireBalls(), objectController.getObjects());
+    collideCount += collide(fireBallController.getFireBalls(),
+                            objectController.getObjects());
+
+    // For the next frame, the "last time" will be "now"
+    setLastTime(getCurrentTime());
+
+    text = "Score: " + std::to_string(collideCount);
+    printText2D(text.data(), 10, 500, 60);
 
     // Swap buffers
     glfwSwapBuffers(window);

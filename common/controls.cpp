@@ -13,6 +13,7 @@ glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
 glm::vec3 direction;
 double currentTime;
+double lastTime = 0.;
 
 glm::mat4 getViewMatrix(){
 	return ViewMatrix;
@@ -31,7 +32,7 @@ float verticalAngle = 0.0f;
 // Initial Field of View
 float initialFoV = 45.0f;
 
-float speed = 3.0f; // 3 units / second
+float speed = 20.0f; // 10 units / second
 float mouseSpeed = 0.005f;
 
 glm::vec3 getPosition() {
@@ -43,7 +44,6 @@ glm::vec3 getDirection() {
 }
 
 double getLastTime() {
-	static double lastTime = glfwGetTime();
 	return lastTime;
 }
 
@@ -51,11 +51,19 @@ double getCurrentTime() {
 	return currentTime;
 }
 
+void setLastTime(double time) {
+	lastTime = time;
+}
+
 
 void computeMatricesFromInputs(){
 
 	// glfwGetTime is called only once, the first time this function is called
-	static double lastTime = getLastTime();
+	if (lastTime == 0.) {
+		lastTime = glfwGetTime();
+	}
+
+	// static double lastTime = getLastTime();
 
 	// Compute time difference between current and last frame
 	currentTime = glfwGetTime();
@@ -117,6 +125,4 @@ void computeMatricesFromInputs(){
 								up                  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
 
-	// For the next frame, the "last time" will be "now"
-	lastTime = currentTime;
 }

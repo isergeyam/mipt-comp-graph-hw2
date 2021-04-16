@@ -68,6 +68,7 @@ add_executable(main
 	common/controls.cpp
 	common/texture.cpp
 	common/objloader.cpp
+	common/text2D.cpp
 )
 target_link_libraries(main
 	${ALL_LIBS}

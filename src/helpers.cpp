@@ -62,13 +62,15 @@ GLFWwindow* initWindow() {
   return window;
 }
 
-void collide(std::vector<FireBall>& fireBalls, std::vector<Object>& objects) {
+size_t collide(std::vector<FireBall>& fireBalls, std::vector<Object>& objects) {
+  size_t collideCount = 0;
   for (auto ballIt = fireBalls.begin(); ballIt != fireBalls.end();) {
     bool deleted = false;
     for (auto objectIt = objects.begin(); objectIt != objects.end();
          ++objectIt) {
-      if (glm::distance(ballIt->getPosition(), objectIt->getPosition()) <
+      if (glm::distance(ballIt->getFireBallPosition(), objectIt->getObjectPosition()) <
           FireBall::colliderRadius + Object::colliderRadius) {
+        ++collideCount;
         deleted = true;
         objects.erase(objectIt);
         ballIt = fireBalls.erase(ballIt);
@@ -77,4 +79,5 @@ void collide(std::vector<FireBall>& fireBalls, std::vector<Object>& objects) {
     }
     if (!deleted) ++ballIt;
   }
+  return collideCount;
 }

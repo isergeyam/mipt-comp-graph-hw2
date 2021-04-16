@@ -7,7 +7,7 @@ class FireBall {
  public:
   FireBall();
   void draw();
-  glm::vec3 getPosition();
+  glm::vec3 getFireBallPosition();
 
  private:
   glm::vec3 position;
@@ -29,5 +29,5 @@ class FireBall {
   static GLuint Texture;
   static size_t verticesCount;
 
-  static constexpr float ballSpeed = 0.05f;
+  static constexpr float ballSpeed = 50.0f;
 };

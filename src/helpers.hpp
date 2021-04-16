@@ -7,4 +7,4 @@
 
 GLFWwindow* initWindow();
 
-void collide(std::vector<FireBall> &fireBalls, std::vector<Object> &objects);
+size_t collide(std::vector<FireBall> &fireBalls, std::vector<Object> &objects);

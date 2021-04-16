@@ -27,7 +27,7 @@ FireBall::FireBall() {
   position = getPosition() + direction * 5.0f;
 }
 
-glm::vec3 FireBall::getPosition() { return position; }
+glm::vec3 FireBall::getFireBallPosition() { return position; }
 
 bool FireBall::init() {
   // Create and compile our GLSL program from the shaders

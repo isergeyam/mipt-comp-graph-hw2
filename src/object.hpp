@@ -8,7 +8,7 @@ class Object {
  public:
   Object();
   void draw();
-  glm::vec3 getPosition();
+  glm::vec3 getObjectPosition();
 
  public:
   static bool init();
